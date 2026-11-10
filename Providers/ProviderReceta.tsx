@@ -11,9 +11,19 @@ export default function ProviderReceta(prop: Plantilla) {
         setRecetaLista([...recetaLista, receta])
         Alert.alert('Creacion de Receta, Receta Agregada')
     }
+
+    function recetaEliminar(idReceta: number) {
+      setRecetaLista((actual) => {
+        const indice = actual.findIndex((item) => item.id === idReceta)
+        if (indice === -1) return actual
+
+          return actual.filter((_,index) => index !== indice)
+      })
+      Alert.alert('Eliminación de la Receta, Receta Eliminada')
+    }
   return (
     <ContextReceta.Provider
-    value={{recetaLista, recetaAgregar}}>
+    value={{recetaLista, recetaAgregar, recetaEliminar}}>
         {prop.children}
     </ContextReceta.Provider>
   )
